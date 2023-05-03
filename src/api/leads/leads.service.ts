@@ -1,8 +1,9 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
-import { CreateLeadDto } from './dto/create-lead.dto';
-import { UpdateLeadDto } from './dto/update-lead.dto';
+import { CreateLeadDto } from './dto/create-lead.input.dto';
+import { UpdateLeadDto } from './dto/update-lead.input.dto';
 import { PrismaService } from '../../providers/prisma/prisma.service';
 import { Lead } from '@prisma/client';
+import { GetLeadsInputDto } from './dto/get-leads.input.dto';
 
 @Injectable()
 export class LeadsService {
@@ -12,8 +13,8 @@ export class LeadsService {
     return this.prisma.lead.create({ data: createLeadDto });
   }
 
-  public findAll(): Promise<Lead[]> {
-    return this.prisma.lead.findMany();
+  public find(input: GetLeadsInputDto): Promise<Lead[]> {
+    return this.prisma.lead.findMany({ where: input });
   }
 
   public async findOne(id: number): Promise<Lead> {

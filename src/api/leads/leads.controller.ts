@@ -1,9 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, ParseIntPipe } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  ParseIntPipe,
+  Query
+} from '@nestjs/common';
 import { LeadsService } from './leads.service';
-import { CreateLeadDto } from './dto/create-lead.dto';
-import { UpdateLeadDto } from './dto/update-lead.dto';
-import { ApiBody, ApiTags } from '@nestjs/swagger';
+import { CreateLeadDto } from './dto/create-lead.input.dto';
+import { UpdateLeadDto } from './dto/update-lead.input.dto';
+import { ApiBody, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { StandardizePhoneNumberPipe } from './decorators/standardize-phone-number.pipe';
+import { LEAD_SOURCES, LEAD_STATUSES } from './leads.types';
+import { GetLeadsInputDto } from './dto/get-leads.input.dto';
 
 @ApiTags('Leads')
 @Controller('leads')
@@ -17,8 +29,20 @@ export class LeadsController {
   }
 
   @Get()
-  public findAll() {
-    return this.leadsService.findAll();
+  @ApiQuery({
+    name: 'source',
+    required: false,
+    type: String,
+    enum: LEAD_SOURCES
+  })
+  @ApiQuery({
+    name: 'status',
+    required: false,
+    type: String,
+    enum: LEAD_STATUSES
+  })
+  public findAll(@Query() input: GetLeadsInputDto) {
+    return this.leadsService.find(input);
   }
 
   @Get(':id')

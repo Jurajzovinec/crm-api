@@ -1,7 +1,7 @@
 import { Injectable, PipeTransform } from '@nestjs/common';
 import * as libPhoneNumber from 'google-libphonenumber';
-import { CreateLeadDto } from '../dto/create-lead.dto';
-import { UpdateLeadDto } from '../dto/update-lead.dto';
+import { CreateLeadDto } from '../dto/create-lead.input.dto';
+import { UpdateLeadDto } from '../dto/update-lead.input.dto';
 
 @Injectable()
 export class StandardizePhoneNumberPipe implements PipeTransform {
