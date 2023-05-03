@@ -3,7 +3,7 @@
 ### Prerequisites
 
 - docker and docker-compose installed
-- available ports 3000 and 5432
+- ports 3000 and 5432 available
 
 ### Usage
 
