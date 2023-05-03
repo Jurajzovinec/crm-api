@@ -1,4 +1,4 @@
-# Warehouse product picking optimization
+# Crm API
 
 ### Prerequisites
 
@@ -18,3 +18,5 @@
 4. Stop app using:
 
 - `npm run docker:down`
+
+[![USAGE](http://img.youtube.com/vi/1Bxovpm0wQY/0.jpg)](http://www.youtube.com/watch?v=1Bxovpm0wQY 'Usage')
