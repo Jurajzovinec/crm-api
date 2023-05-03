@@ -7,10 +7,14 @@
 
 ### Usage
 
-1. Start app using
+1. Start app using:
 
-- `npm run docker:dev`
+- `npm run docker:up`
 
 2. Play with [API documentation](http://localhost:3000/api)
 
 3. Login to POSTGRES database using credentials from [dockerfile](./db/Dockerfile)
+
+4. Stop app using:
+
+- `npm run docker:down`
