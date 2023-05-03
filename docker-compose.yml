@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  ###########
+  # CRM_API #
+  ###########
+  api:
+    container_name: crm-api
+    ports:
+      - 3000:3000
+      - 9229:9229
+    environment:
+      NODE_ENV: development
+    env_file:
+      - ./.env
+    volumes:
+      - ./:/usr/src/app
+      - ./.env:/usr/src/app/.env
+      - /usr/src/app/node_modules
+    depends_on:
+      - db
+    build:
+      context: .
+      target: base
+    command: npm run start:dev
+
+  ##########
+  # CRM_DB #
+  ##########
+  db:
+    container_name: crm-db
+    build:
+      context: ./db
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
